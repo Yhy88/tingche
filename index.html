@@ -31,26 +31,26 @@
   </style>
 </head>
 <body>
-  <a id="callBtn" class="call-btn" href="#">📞 扫码/点击拨号</a>
+  <a id="callBtn" class="call-btn" href="javascript:void(0);">📞 扫码/点击拨号</a>
 
   <script>
-    const mixStr = "NDU5Mzk5MzM5ODE=|reverse|10"; 
-    
-    function decodePhone(str) {
-      const [base64Str, method, radix] = str.split("|");
-      let phone = atob(base64Str);
-      if (method === "reverse") {
-        phone = phone.split("").reverse().join("");
-      }
-      if (radix) {
-        phone = phone.split("").map(c => parseInt(c, radix)).join("");
-      }
-      return phone;
-    }
-
-    const phoneNum = decodePhone(mixStr);
-    document.getElementById("callBtn").href = "tel:" + phoneNum;
-
+    document.getElementById("callBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      const mixStr = "NDU5Mzk5MzM5ODE=|reverse|10"; 
+      const decodePhone = (str) => {
+        const [base64Str, method, radix] = str.split("|");
+        let phone = atob(base64Str);
+        if (method === "reverse") {
+          phone = phone.split("").reverse().join("");
+        }
+        if (radix) {
+          phone = phone.split("").map(c => parseInt(c, radix)).join("");
+        }
+        return phone;
+      };
+      const phoneNum = decodePhone(mixStr);
+      window.location.href = "tel:" + phoneNum;
+    });
     document.getElementById("callBtn").addEventListener("contextmenu", (e) => {
       e.preventDefault();
     });
