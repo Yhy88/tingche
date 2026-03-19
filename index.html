@@ -1,172 +1,57 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>扫码挪车</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: #f7f8fa;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      padding: 0 20px;
-    }
-    /* 卡片入场动画 */
-    .card {
-      background: white;
-      width: 100%;
-      max-width: 380px;
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      animation: cardFadeIn 0.6s ease-out forwards;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    /* 表情动画容器 */
-    .emoji {
-      font-size: 48px;
-      margin-bottom: 20px;
-      /* 挥手动画 */
-      animation: wave 2s ease-in-out infinite, emojiFadeIn 0.7s ease-out forwards;
-      opacity: 0;
-      transform-origin: 70% 70%;
-    }
-    /* 标题渐入动画 */
-    .title {
-      font-size: 22px;
-      font-weight: bold;
-      color: #333;
-      margin-bottom: 10px;
-      animation: titleFadeIn 0.8s ease-out forwards;
-      opacity: 0;
-    }
-    /* 描述文字渐入 */
-    .desc {
-      font-size: 15px;
-      color: #666;
-      margin-bottom: 35px;
-      line-height: 1.5;
-      animation: descFadeIn 1s ease-out forwards;
-      opacity: 0;
-    }
-    /* 按钮动效（hover+点击+呼吸） */
-    .call-btn {
-      display: inline-block;
-      width: 100%;
-      font-size: 18px;
-      font-weight: 500;
-      color: #fff;
-      background: #007aff;
-      padding: 16px 0;
-      border-radius: 12px;
-      text-decoration: none;
-      box-shadow: 0 6px 15px rgba(0, 122, 255, 0.25);
-      /* 呼吸动画（持续） */
-      animation: btnBreath 3s ease-in-out infinite, btnFadeIn 1.2s ease-out forwards;
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-    /* 按钮hover效果 */
-    .call-btn:hover {
-      background: #0066e0;
-      box-shadow: 0 8px 20px rgba(0, 122, 255, 0.35);
-      transform: translateY(-2px);
-    }
-    /* 按钮点击效果 */
-    .call-btn:active {
-      transform: scale(0.97);
-      box-shadow: 0 4px 10px rgba(0, 122, 255, 0.2);
-    }
-
-    /* 动画关键帧定义 */
-    @keyframes cardFadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @keyframes emojiFadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-    @keyframes titleFadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-    @keyframes descFadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-    @keyframes btnFadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-    /* 表情挥手动画 */
-    @keyframes wave {
-      0% { transform: rotate(0deg); }
-      10% { transform: rotate(14deg); }
-      20% { transform: rotate(-8deg); }
-      30% { transform: rotate(14deg); }
-      40% { transform: rotate(-4deg); }
-      50% { transform: rotate(10deg); }
-      60% { transform: rotate(0deg); }
-      100% { transform: rotate(0deg); }
-    }
-    /* 按钮呼吸动画（放大缩小循环） */
-    @keyframes btnBreath {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.02);
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>扫码挪车</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#f5f7fa 0%,#e4eaf5 100%);display:flex;justify-content:center;align-items:center;height:100vh;padding:0 20px;overflow:hidden}
+.card{background:white;width:100%;max-width:380px;padding:40px 30px;border-radius:24px;box-shadow:0 15px 35px rgba(0,0,0,0.08);text-align:center;position:relative;animation:cardIn 0.6s ease-out forwards;opacity:0;transform:translateY(20px);z-index:2}
+.emoji{font-size:50px;margin-bottom:20px;animation:bounce 2s infinite, fadeIn 0.7s forwards;opacity:0}
+.title{font-size:23px;font-weight:700;color:#222;margin-bottom:10px;animation:fadeIn 0.8s .1s forwards;opacity:0}
+.desc{font-size:15px;color:#666;margin-bottom:35px;line-height:1.5;animation:fadeIn 0.9s .2s forwards;opacity:0}
+.call-btn{display:inline-block;width:100%;font-size:18px;font-weight:500;color:#fff;background:linear-gradient(90deg,#007aff,#0099ff);padding:18px 0;border-radius:16px;text-decoration:none;box-shadow:0 8px 20px rgba(0,122,255,0.3);animation:pulse 3s infinite, fadeIn 1s .3s forwards;opacity:0;transition:all 0.3s}
+.call-btn:active{transform:scale(0.96)}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 8px 20px rgba(0,122,255,0.3)}50%{transform:scale(1.03);box-shadow:0 12px 28px rgba(0,122,255,0.4)}}
+.floating{position:fixed;pointer-events:none;animation:floatUp 4s linear forwards;z-index:1}
+@keyframes floatUp{0%{transform:translateY(110vh);opacity:1}100%{transform:translateY(-10vh);opacity:0}}
+</style>
 </head>
 <body>
-  <div class="card">
-    <!-- 新增表情动画 -->
-    <div class="emoji">🤝</div>
-    <div class="title">扫码联系车主</div>
-    <div class="desc">您好，麻烦请联系挪车，谢谢配合～</div>
-    <a id="callBtn" class="call-btn" href="javascript:void(0);">📞 点击拨号</a>
-  </div>
+<div class="card">
+<div class="emoji">🚗💨</div>
+<div class="title">联系车主</div>
+<div class="desc">你好！临时停靠，请多多关照～</div>
+<a id="callBtn" class="call-btn" href="javascript:void(0);">📞 立即拨号</a>
+</div>
+<script>
+const emojis = ['❤️','💛','💚','💙','💜','🌟','✨','⭐','💖','💗'];
+function createFloat(){
+  let f = document.createElement('div');
+  f.className = 'floating';
+  f.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+  f.style.left = Math.random()*100 + 'vw';
+  f.style.fontSize = Math.random()*20 + 18 + 'px';
+  f.style.animationDuration = Math.random()*3 + 4 + 's';
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),6000);
+}
+setInterval(createFloat,300);
 
-  <script>
-    document.getElementById("callBtn").addEventListener("click", function(e) {
-      e.preventDefault();
-      const mixStr = "NDU5Mzk5MzM5ODE=|reverse|10";
-      const decodePhone = (str) => {
-        const [base64Str, method, radix] = str.split("|");
-        let phone = atob(base64Str);
-        if (method === "reverse") {
-          phone = phone.split("").reverse().join("");
-        }
-        if (radix) {
-          phone = phone.split("").map(c => parseInt(c, radix)).join("");
-        }
-        return phone;
-      };
-      const phoneNum = decodePhone(mixStr);
-      window.location.href = "tel:" + phoneNum;
-    });
-    document.getElementById("callBtn").addEventListener("contextmenu", (e) => {
-      e.preventDefault();
-    });
-  </script>
+document.getElementById("callBtn").addEventListener("click",function(e){
+  e.preventDefault();
+  const s="NDU5Mzk5MzM5ODE=|reverse|10";
+  const [a,b,c]=s.split("|");
+  let p=atob(a);
+  if(b=="reverse")p=p.split("").reverse().join("");
+  if(c)p=p.split("").map(n=>parseInt(n,c)).join("");
+  location.href="tel:"+p;
+});
+document.getElementById("callBtn").addEventListener("contextmenu",e=>e.preventDefault());
+</script>
 </body>
 </html>
