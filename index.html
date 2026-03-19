@@ -3,40 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>扫码拨号</title>
+  <title>扫码挪车</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    body {
       font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-      background-color: #f5f5f5;
+      background: #f7f8fa;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      padding: 0 20px;
+    }
+    .card {
+      background: white;
+      width: 100%;
+      max-width: 380px;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+    .title {
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .desc {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 35px;
+      line-height: 1.5;
     }
     .call-btn {
-      font-size: 1.8rem;
-      text-decoration: none;
-      color: white;
-      background-color: #007bff;
-      padding: 1.2rem 3rem;
+      display: inline-block;
+      width: 100%;
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+      background: #007aff;
+      padding: 16px 0;
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
-      transition: background-color 0.3s;
+      text-decoration: none;
+      box-shadow: 0 6px 15px rgba(0, 122, 255, 0.25);
+      transition: all 0.2s;
     }
-    .call-btn:hover {
-      background-color: #0056b3;
+    .call-btn:active {
+      transform: scale(0.97);
     }
   </style>
 </head>
 <body>
-  <a id="callBtn" class="call-btn" href="javascript:void(0);">📞 扫码/点击拨号</a>
+  <div class="card">
+    <div class="title">扫码联系车主</div>
+    <div class="desc">您好，麻烦请联系挪车，谢谢配合～</div>
+    <a id="callBtn" class="call-btn" href="javascript:void(0);">📞 点击拨号</a>
+  </div>
 
   <script>
     document.getElementById("callBtn").addEventListener("click", function(e) {
       e.preventDefault();
-      const mixStr = "NDU5Mzk5MzM5ODE=|reverse|10"; 
+      const mixStr = "NDU5Mzk5MzM5ODE=|reverse|10";
       const decodePhone = (str) => {
         const [base64Str, method, radix] = str.split("|");
         let phone = atob(base64Str);
