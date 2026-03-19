@@ -19,6 +19,7 @@
       height: 100vh;
       padding: 0 20px;
     }
+    /* 卡片入场动画 */
     .card {
       background: white;
       width: 100%;
@@ -27,19 +28,30 @@
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       text-align: center;
+      /* 入场动画 */
+      animation: cardFadeIn 0.6s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
     }
+    /* 标题渐入动画 */
     .title {
       font-size: 22px;
       font-weight: bold;
       color: #333;
       margin-bottom: 10px;
+      animation: titleFadeIn 0.8s ease-out forwards;
+      opacity: 0;
     }
+    /* 描述文字渐入 */
     .desc {
       font-size: 15px;
       color: #666;
       margin-bottom: 35px;
       line-height: 1.5;
+      animation: descFadeIn 1s ease-out forwards;
+      opacity: 0;
     }
+    /* 按钮动效（hover+点击+呼吸） */
     .call-btn {
       display: inline-block;
       width: 100%;
@@ -51,17 +63,60 @@
       border-radius: 12px;
       text-decoration: none;
       box-shadow: 0 6px 15px rgba(0, 122, 255, 0.25);
-      transition: all 0.2s;
+      /* 呼吸动画（持续） */
+      animation: btnBreath 3s ease-in-out infinite, btnFadeIn 1.2s ease-out forwards;
+      opacity: 0;
+      transition: all 0.3s ease;
     }
+    /* 按钮hover效果 */
+    .call-btn:hover {
+      background: #0066e0;
+      box-shadow: 0 8px 20px rgba(0, 122, 255, 0.35);
+      transform: translateY(-2px);
+    }
+    /* 按钮点击效果 */
     .call-btn:active {
       transform: scale(0.97);
+      box-shadow: 0 4px 10px rgba(0, 122, 255, 0.2);
+    }
+
+    /* 动画关键帧定义 */
+    @keyframes cardFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes titleFadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    @keyframes descFadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    @keyframes btnFadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    /* 呼吸动画（放大缩小循环） */
+    @keyframes btnBreath {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+      }
     }
   </style>
 </head>
 <body>
   <div class="card">
     <div class="title">扫码联系车主</div>
-    <div class="desc">您好，临时停靠，谢谢。～</div>
+    <div class="desc">您好，麻烦请联系挪车，谢谢配合～</div>
     <a id="callBtn" class="call-btn" href="javascript:void(0);">📞 点击拨号</a>
   </div>
 
